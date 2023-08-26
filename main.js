@@ -1,20 +1,22 @@
-const img_bg = document.querySelector(".img-bg");
-const loading = document.querySelector(".loading");
+const loadText = document.querySelector(".loading-text");
+const bg = document.querySelector(".bg");
+
 let load = 0;
 
-const blur = () => {
+let int = setInterval(blurring, 30);
+
+function blurring() {
   load++;
+
   if (load > 99) {
-    clearInterval(headBlur);
+    clearInterval(int);
   }
 
-  loading.innerHTML = `${load}%`;
-  loading.style.opacity = scale(load, 0, 100, 1, 0);
-  img_bg.style.filter = `blur(${scale(load, 0, 100, 30, 0)}px)`;
-};
+  loadText.innerText = `${load}%`;
+  loadText.style.opacity = scale(load, 0, 100, 1, 0);
+  bg.style.filter = `blur(${scale(load, 0, 100, 30, 0)}px)`;
+}
 
-let headBlur = setInterval(blur, 30);
-
-const scale = (number, inMin, inMax, outMin, outMax) => {
-  return ((number - inMin) * (outMax - outMin)) / (inMax - inMin) + outMin;
+const scale = (num, in_min, in_max, out_min, out_max) => {
+  return ((num - in_min) * (out_max - out_min)) / (in_max - in_min) + out_min;
 };
